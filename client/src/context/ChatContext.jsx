@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState, useCallback } from "react";
 import { baseUrl, getRequest, postRequest } from "../utils/services";
 import { io } from "socket.io-client";
-import { c } from "tar";
 
 export const ChatContext = createContext();
 
@@ -21,7 +20,8 @@ export const ChatContextProvider = ({ children, user }) => {
     const [notifications, setNotifications] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
 
-    console.log(onlineUsers, "smt");
+
+    // console.log(onlineUsers, "smt");
 
     // initial socket
 
@@ -123,9 +123,14 @@ export const ChatContextProvider = ({ children, user }) => {
             if (user?._id) {
                 setIsUserChatsLoading(true);
                 setUserChatsErr(null);
+
+                // console.log("user", user);
+
                 const response = await getRequest(
                     `${baseUrl}/chats/${user?._id}`
                 );
+
+                // console.log("response", response); check if userChats is working
 
                 setIsUserChatsLoading(false);
 
@@ -139,6 +144,7 @@ export const ChatContextProvider = ({ children, user }) => {
     }, [user]);
 
     const updateCurrentChat = useCallback((chat) => {
+        console.log(chat, "chat");
         setCurrentChat(chat);
     }, []);
 
@@ -155,7 +161,7 @@ export const ChatContextProvider = ({ children, user }) => {
             if (response.error) {
                 return setMessagesErr(response);
             }
-            console.log(response);
+            // console.log(response);
             setMessages(response);
         };
         getMessages();

@@ -12,15 +12,19 @@ function ChatBox() {
         useContext(ChatContext);
     const { recipientUser } = useFetchRecepientUser(currentChat, user);
     const [textMessage, setTextMessage] = useState("");
-    const scroll = useRef()
+    const scroll = useRef();
 
-    // console.log(recipientUser);
+    console.log(recipientUser, "recipientsUser");
 
-    console.log("text");
+    // console.log(messages);
 
-    useEffect(()=> {
-        scroll.current?.scrollIntoView({behavior: 'smooth'})
-    }, messages)
+    console.log("recipientUser", recipientUser);
+
+    // console.log("text");
+
+    useEffect(() => {
+        scroll.current?.scrollIntoView({ behavior: "smooth" });
+    }, messages);
 
     if (!recipientUser)
         return (
@@ -70,7 +74,17 @@ function ChatBox() {
                     fontFamily="nunito"
                     borderColor="rgba(72, 112,223, 0.2)"
                 />
-                <button className="send-btn" onClick={() => sendTextMessage(textMessage, user, currentChat._id, setTextMessage)}>
+                <button
+                    className="send-btn"
+                    onClick={() =>
+                        sendTextMessage(
+                            textMessage,
+                            user,
+                            currentChat._id,
+                            setTextMessage
+                        )
+                    }
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"

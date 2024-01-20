@@ -19,8 +19,7 @@ app.get("/", (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-const URL =
-    process.env.ATLAS_URL 
+const URL = process.env.ATLAS_URL;
 
 app.listen(port, (req, res) => {
     console.log(`Server is running on port ${port}`);
